@@ -19,4 +19,6 @@ Run server
 
 ### Web images
 
-![Primera imagen]( "a title")
+![Principal page](https://github.com/HaroldEnrique/web-test-prodequa/blob/main/public/static/images/web_3.png "principal page")
+![Solicitud page](https://github.com/HaroldEnrique/web-test-prodequa/blob/main/public/static/images/web_1.png "solicitud page")
+![Solicitud view](https://github.com/HaroldEnrique/web-test-prodequa/blob/main/public/static/images/web_2.png "solicitud view")
