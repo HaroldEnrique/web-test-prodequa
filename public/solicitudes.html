@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="static/css/styles.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
     </head>
-    <body class="font-sans antialiased bg-blue-100 sm:bg-gray-100">
+    <body class="font-sans antialiased bg-gray-100">
         <header id="message">
             <nav class="bg-gray-800">
                 <div class="w-full text-white mx-auto px-2 sm:px-6 lg:px-8 relative flex items-center h-16">
@@ -64,14 +64,23 @@
 
         <section id="inquiry" class="container mx-auto block px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 pt-12">
 
-            <div class="sm:flex justify-around">
-                <div>
-                    <button>Activos</button>
+            <div class="w-full bg-white shadow-md rounded-md px-6 pb-1">
+                <div class="">
+                    <div class="pl-4 pt-4">
+                        <h1 class="font-bold text-gray-800 uppercase">Lista de solicitudes</h1>
+                    </div>
+                    <div class="px-2 py-2">
+                        <hr>
+                    </div>
                 </div>
-                <div>
-                    <button>Atendidos</button>
+                <div class="relative sm:flex pl-4 items-center h-12">
+                    <!-- inline-block sm:flex pl-4 align-middle items-stretch -->
+                    <span class="text-center">Filtros:</span>
+                    <button class="text-sm ml-4 p-2 focus:outline-none bg-gray-800 rounded-md text-white hover:bg-white hover:text-gray-800 hover:border-green-300 border-2 ">Pendientes</button>
+                    <button class="text-sm ml-4 p-2 focus:outline-none bg-gray-800 rounded-md text-white hover:bg-white hover:text-gray-800 hover:border-green-300 border-2 ">Atendidos</button>
                 </div>
             </div>
+            
 
 
             <div class="flex items-center">
