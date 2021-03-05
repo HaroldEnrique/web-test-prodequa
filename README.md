@@ -19,4 +19,4 @@ Run server
 
 ### Imágemes
 
-![Primera imagen](https://drive.google.com/file/d/1X89gp3t6P8DuEsAPxdaDzL5Raafe4Jud/view?usp=sharing "a title")
+![Primera imagen](https://github.com/HaroldEnrique/web-test-prodequa/blob/main/public/static/images/logo.png "a title")
