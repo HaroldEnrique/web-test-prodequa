@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <!-- <script src="static/js/vue.js"></script> -->
+    <!-- <script src="https://unpkg.com/vue@3.0.5"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+
+</head>
+<body class="font-sans antialiased bg-blue-100 sm:bg-gray-100">
+    <header id="toggle">
+        <nav class="bg-gray-800">
+            <div class="w-full text-white mx-auto px-2 sm:px-6 lg:px-8 relative flex items-center h-16">
+                <div class="sm:hidden">
+                    <!-- absolute inset-y-0 left-0 flex items-center sm:hidden -->
+                    <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Icon when menu is closed. -->
+                        <!-- Heroicon name: outline/menu
+                            Menu open: "hidden", Menu closed: "block"-->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <!-- Icon when menu is open. -->
+                        <!-- Heroicon name: outline/x
+                                Menu open: "block", Menu closed: "hidden"-->
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="flex-1 flex justify-center sm:items-stretch sm:justify-start">
+                    <div class="flex-shrink-0 flex">
+                        <img class="block lg:hidden h-8 w-auto" src="static/images/logo.png" alt="Workflow">
+                        <!-- https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg -->
+                        <!-- https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg -->
+                        <img class="hidden lg:block h-8 w-auto" src="static/images/logo.png" alt="Workflow">
+                    </div>
+                    <div class="hidden sm:block sm:ml-6">
+                        <div class="flex space-x-4">
+                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                            <!-- bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium -->
+                            <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Principal</a>
+                            <a href="solicitudes.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Solicitudes</a>
+                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sobre nosotros</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="show">
+                <div class="px-2 pt-1 pb-2 space-y-0">
+                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                    <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">Principal</a>                    
+                    <a href="solicitudes.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">Solicitudes</a>
+                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">Sobre nosotros</a>
+                </div>
+            </div>
+        </nav>
+        
+    </header>
+
+    <section id="section" class="container mx-auto block px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 pt-12">
+
+        <div class="text-center mb-6 gap-7">
+            <div>
+                <h1 class="tracking-wide text-3xl font-bold"> COMUNÍCATE CON NOSOTROS </h1>
+            </div>
+            <div class="justify-center flex sm:p-4">
+                <img class="sm:h-60 sm:w-auto" src="static/images/contactus_2.svg" type=""/>
+            </div>
+            <div>
+                <p>
+                    Puedes dejar aquí tus consultas.
+                </p>    
+            </div>
+        </div>
+
+        <form class="w-full" id="form_contact" @submit.prevent="onSubmit">
+            <div class="bg-white shadow-md rounded-md">
+                <div class="w-full sm:flex">
+                    <div class="pt-4 pl-4 pr-4 sm:w-1/2">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-names">
+                                Nombres y Apellidos
+                                </label>
+                                <input v-model="gridNames" class="required appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-names" type="text" placeholder="Juan Sanchez">
+                                <p class="text-red-500 text-xs italic">* Requerido</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-charge">
+                                Cargo
+                                </label>
+                                <input v-model="gridCharge" class="required appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="grid-charge" type="text" placeholder="Gestor de Proyectos">
+                                <p class="text-red-500 text-xs italic">* Requerido</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-phone">
+                                Celular
+                                </label>
+                                <input v-model="gridPhone" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="grid-phone" type="number" placeholder="999888555">
+                                <p class="text-red-500 text-xs italic">* Requerido</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
+                                Email
+                                </label>
+                                <input v-model="gridEmail" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="grid-email" type="email" placeholder="me@gmail.com">
+                                <p class="text-red-500 text-xs italic">* Requerido</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 pl-4 pr-4 sm:w-1/2">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-businessName">
+                                Razón Social
+                                </label>
+                                <input v-model="gridBusinessName" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="grid-businessName" type="text" placeholder="My Business Name">
+                                <p class="text-red-500 text-xs italic">* Requerido</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-need">
+                                Tipo de solicitud
+                                </label>
+                                <div class="relative mb-3" id="v-model-select">
+                                    <select v-model="gridNeed" class="block appearance-none w-full bg-gray-200 border-2 border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="grid-need">
+                                        <option disabled value="">Selecciona una opción</option>
+                                        <option>Atracción y Selección</option>
+                                        <option>Evaluación Psicolaboral</option>
+                                        <option>Consultoría y Desarrollo</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </div>
+                                </div>
+                                <p class="text-red-500 text-xs italic">* Requerido</p>
+                            </div>
+                            
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-message">
+                                Mensaje
+                                </label>
+                                <textarea v-model="gridMessage" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" name="" id="grid-message" cols="30" rows="7"></textarea>
+                                <p class="text-red-500 text-xs italic">* Requerido</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="justify-center pb-1 flex">
+                        <button type="submit" class="group inline-flex items-center p-3 border-2 border-gray-800 rounded-md bg-gray-800 text-white hover:border-green-300 hover:text-gray-800 hover:bg-white focus:outline-none focus:shadow-outline-blue"> 
+                            <!-- btn btn-primary mx-auto -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="text-sm font-semibold">Enviar</span>
+                        </button>
+                    </div>
+                    <div class="text-center pb-4 text-xs italic"> {{successMessage}}</div>    
+                </div>
+                
+
+            </div>
+        </form>
+        
+        
+
+    </section>
+
+    <footer class="mt-8 relative bg-gray-800 text-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 pt-12 pb-10 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row sm:flex-wrap">
+            <div class="sm:w-1/2 lg:w-1/4">
+                <h6 class="text-sm font-bold uppercase">Sobre nosotros</h6>
+                <ul class="mt-4">
+                    <li>
+                        <a href="#">Principal</a>
+                    </li>
+                    <li class="mt-2">
+                        <a href="#">Plataforma</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-8 sm:w-1/2 sm:mt-12 lg:w-1/4 md:mt-0 lg:mt-0">
+                <h6 class="text-sm font-bold uppercase">Contacto</h6>
+                <ul class="mt-4">
+                    <li>
+                        <a target="_blank" href="mailto:contacto@startup.com">contacto@startup.com</a>
+                    </li>
+                    <li class="mt-2">
+                        <p>+51 999 888 666</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-8 sm:w-1/2 lg:w-1/4 lg:mt-0">
+                <h6 class="text-sm font-bold uppercase">Otros canales</h6>
+                <ul class="mt-4">
+                    <li>
+                        <i class="fa fa-telegram"></i>
+                        <a target="_blank" href="https://t.me/AmazonBrasilTop">@MyStartup</a>
+                    </li>
+                    <li class="mt-2">
+                        <i class="fa fa-telegram"></i>
+                        <a target="_blank" href="https://t.me/AmericanasTop">@MyStartup</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-12 sm:w-1/2 lg:w-1/4 lg:mt-0">
+                <div class="flex justify-center md:justify-start lg:justify-center">
+                    <img class="w-auto h-52" src="static/images/logo.png">
+                </div>
+                <p class="text-base mt-4 pl-3">Developing My Startup, this is the future.</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-16">
+            <hr class="mb-8 opacity-30">
+            <p class="text-sm ">2021 © MyStartup. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- <script src="static/js/vue.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script>
+
+        const toggle = Vue.createApp({
+            // el: '#toggle',
+            data() {
+                return {
+                    show: false,
+                }
+            }
+        }).mount('#toggle');
+
+        const section = Vue.createApp({
+            // el: '#toggle',
+            data() {
+                return {
+                    successMessage: '',
+                    gridNames: '',
+                    gridCharge: '',
+                    gridPhone: '',
+                    gridEmail: '',
+                    gridBusinessName: '',
+                    gridNeed: '',
+                    gridMessage: '',
+                    source: 'http://localhost:3000/inquiries'
+                }
+            },
+
+            methods: {
+                onSubmit() {
+                    console.log("we are on submit")
+                    const headers = { 
+                        "Content-Type": "application/json",
+                    };
+
+                    const inquiry = { 
+                        completeName: this.gridNames,
+                        charge: this.gridCharge,
+                        businessName: this.gridBusinessName,
+                        message: this.gridMessage,
+                        status: "Pendiente",
+                        contact: {
+                            phone: this.gridPhone,
+                            email: this.gridEmail
+                        },
+                        need: {
+                            needType: this.gridNeed,
+                            description: ""
+                        }
+                    };
+
+                    axios.post(this.source, inquiry, {headers})
+                        .then(response => {
+                            this.successMessage = "Gracias por escribirnos, su consulta fue enviada con éxito." // response.data.id
+                            setTimeout(() => {
+                                this.successMessage = '';
+                                this.gridNames = '';
+                                this.gridCharge = '';
+                                this.gridPhone = '';
+                                this.gridEmail = '';
+                                this.gridBusinessName = '';
+                                this.gridNeed = '';
+                                this.gridMessage = '';
+                            }, 5000);
+                            // clearInterval(refreshIntervalId);
+                        }).catch(error => {
+                            // this.errorMessage = error.message;
+                            console.log("There was an error!", error);
+                        });
+                }
+            }
+        }).mount('#section');
+
+    </script>
+</body>
+</html>

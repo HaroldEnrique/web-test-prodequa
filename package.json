@@ -1,0 +1,19 @@
+{
+  "name": "prodequa-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "postcss css/tailwind.css -o public/static/css/styles.css",
+    "dev": "postcss css/tailwind.css -o public/static/css/styles.css --watch"
+  },
+  "author": "HaroldEnrique",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.7",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.0.3"
+  }
+}

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="static/css/styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    </head>
+    <body class="font-sans antialiased bg-blue-100 sm:bg-gray-100">
+        <header id="message">
+            <nav class="bg-gray-800">
+                <div class="w-full text-white mx-auto px-2 sm:px-6 lg:px-8 relative flex items-center h-16">
+                    <div
+                        class="sm:hidden">
+                        <!-- absolute inset-y-0 left-0 flex items-center sm:hidden -->
+                        <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <!-- Icon when menu is closed. -->
+                            <!-- Heroicon name: outline/menu
+                                                        Menu open: "hidden", Menu closed: "block"-->
+                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <!-- Icon when menu is open. -->
+                            <!-- Heroicon name: outline/x
+                                                            Menu open: "block", Menu closed: "hidden"-->
+                            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="flex-1 flex justify-center sm:items-stretch sm:justify-start">
+                        <div class="flex-shrink-0 flex">
+                            <img class="block lg:hidden h-8 w-auto" src="static/images/logo.png" alt="Workflow">
+                            <!-- https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg -->
+                            <!-- https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg -->
+                        <img class="hidden lg:block h-8 w-auto" src="static/images/logo.png" alt="Workflow"> </div>
+                        <div class="hidden sm:block sm:ml-6">
+                            <div class="flex space-x-4">
+                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                                <!-- bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium -->
+                                <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"> Principal</a>
+                                <a href="solicitudes.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Solicitudes</a>
+                                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sobre nosotros</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="show">
+                    <div
+                        class="px-2 pt-1 pb-2 space-y-0">
+                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                        <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">Principal</a>
+                        <a href="solicitudes.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">Solicitudes</a>
+                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">Sobre nosotros</a>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+
+        <section id="inquiry" class="container mx-auto block px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 pt-12">
+
+            <div class="sm:flex justify-around">
+                <div>
+                    <button>Activos</button>
+                </div>
+                <div>
+                    <button>Atendidos</button>
+                </div>
+            </div>
+
+
+            <div class="flex items-center">
+                <div class="flex-1 max-w-7xl mx-auto pt-6 pb-12">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <li v-for="(data, id) in inquiries" class="bg-white rounded-lg shadow-lg" style="position: relative;">
+                            <div style="position: absolute; top: 15px; left: 15px; opacity: 0.3;">
+                                <img src="static/images/user.png" width="50" height="50" alt="user image">
+                            </div>
+                            <div>
+                                <div class="p-4 flex flex-col">
+                                    <div class="text-right">
+                                        <p class="text-md text-gray-700 font-bold number-font">{{ data.completeName }}
+                                            <span class="hidden text-gray-400 uppercase">{{ data._id }}</span>
+                                        </p>
+                                        <p class="text-sm text-gray-600 ">{{ data.charge }}</p>
+                                    </div>
+                                    <div class="py-2">
+                                        <hr>
+                                    </div>
+                                    <div class="pt-0">
+                                        <p class="flex items-center justify-between">
+                                            <span class="text-gray-400 text-xs uppercase">Teléfono</span>
+                                            <span class="text-sm font-bold text-gray-500">{{ data.contact.phone }}</span>
+                                        </p>
+                                        <p class="flex items-center justify-between">
+                                            <span class="text-gray-400 text-xs uppercase">Email</span>
+                                            <span class="text-sm number-font font-bold text-gray-500">{{ data.contact.email }}</span>
+                                        </p>
+                                        <p class="flex items-center justify-between">
+                                            <span class="text-gray-400 text-xs uppercase">Razón Social</span>
+                                            <span class="text-sm number-font font-bold text-gray-500">{{ data.businessName }}</span>
+                                        </p>
+                                        <p class="flex items-center justify-between">
+                                            <span class="text-gray-400 text-xs uppercase">Tipo solicitud</span>
+                                            <span class="text-sm number-font font-bold text-gray-500">{{ data.need.needType }}</span>
+                                        </p>
+                                        <p class="flex items-center justify-between">
+                                            <span class="text-gray-400 text-xs uppercase font-bold" v-bind:class="{ 'text-red-300': data.isPending, 'text-green-200': data.wasAttended }">Estado</span>
+                                            <span class="text-sm number-font font-bold" v-bind:class="{ 'text-red-600': data.isPending, 'text-green-500': data.wasAttended }">{{ data.status }}</span>
+                                        </p>
+                                    </div>
+                                    <div class="py-2">
+                                        <hr>
+                                    </div>
+                                    <div class="pt-0 text-center">
+                                        <button class="appearance-none text-gray-400 p-2 hover:text-gray-800 focus:outline-none" v-on:click="viewInquiry(data._id)">Ver Mensaje</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="w-full bg-white shadow-md rounded-md px-6">
+                <div class="pl-4 pt-4">
+                    <h1 class="font-bold text-gray-800 uppercase">Vista por solicitud</h1>
+                </div>
+                <div class="px-2 py-2">
+                    <hr>
+                </div>
+                <div class="w-full sm:flex pb-2">
+                    <div class="pt-4 pl-4 pr-4 sm:w-1/2">
+                        <div class="flex flex-wrap -mx-3 mb-2">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="names">
+                                Nombres y Apellidos
+                                </label>
+                                <input disabled v-model="names" class="required appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="names" type="text" placeholder="Juan Sanchez">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-2">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="charge">
+                                Cargo
+                                </label>
+                                <input disabled v-model="charge" class="required appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="charge" type="text" placeholder="Gestor de Proyectos">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-2">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="phone">
+                                Celular
+                                </label>
+                                <input disabled v-model="phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="phone" type="number" placeholder="999888555">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-2">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email">
+                                Email
+                                </label>
+                                <input disabled v-model="email" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="email" type="email" placeholder="me@gmail.com">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 pl-4 pr-4 sm:w-1/2">
+                        <div class="flex flex-wrap -mx-3 mb-2">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="businessName">
+                                Razón Social
+                                </label>
+                                <input disabled v-model="businessName" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="businessName" type="text" placeholder="My Business Name">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-2">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="needType">
+                                Tipo de Necesidad
+                                </label>
+                                <input disabled v-model="needType" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" id="needType" type="text" placeholder="My Business Name">
+                            </div>
+                            
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-2">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="message">
+                                Mensaje
+                                </label>
+                                <textarea disabled v-model="message" class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-green-300" name="" id="message" cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+
+            </div>
+
+        </section>
+
+
+            <footer class="mt-8 relative bg-gray-800 text-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 pt-12 pb-10 text-center sm:text-left">
+                <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row sm:flex-wrap">
+                    <div class="sm:w-1/2 lg:w-1/4">
+                        <h6 class="text-sm font-bold uppercase">Sobre nosotros</h6>
+                        <ul class="mt-4">
+                            <li>
+                                <a href="#">Principal</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="#">Plataforma</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-8 sm:w-1/2 sm:mt-12 lg:w-1/4 md:mt-0 lg:mt-0">
+                        <h6 class="text-sm font-bold uppercase">Contacto</h6>
+                        <ul class="mt-4">
+                            <li>
+                                <a target="_blank" href="mailto:contacto@startup.com">contacto@startup.com</a>
+                            </li>
+                            <li class="mt-2">
+                                <p>+51 999 888 666</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-8 sm:w-1/2 lg:w-1/4 lg:mt-0">
+                        <h6 class="text-sm font-bold uppercase">Otros canales</h6>
+                        <ul class="mt-4">
+                            <li>
+                                <i class="fa fa-telegram"></i>
+                                <a target="_blank" href="https://t.me/AmazonBrasilTop">@MyStartup</a>
+                            </li>
+                            <li class="mt-2">
+                                <i class="fa fa-telegram"></i>
+                                <a target="_blank" href="https://t.me/AmericanasTop">@MyStartup</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-12 sm:w-1/2 lg:w-1/4 lg:mt-0">
+                        <div class="flex justify-center md:justify-start lg:justify-center">
+                            <img class="w-auto h-52" src="static/images/logo.png">
+                        </div>
+                        <p class="text-base mt-4 pl-3">Developing My Startup, this is the future.</p>
+                    </div>
+                </div>
+                <div class="max-w-7xl mx-auto px-6 mt-16">
+                    <hr class="mb-8 opacity-30">
+                    <p class="text-sm ">2021 © MyStartup. Todos los derechos reservados.</p>
+                </div>
+            </footer>
+
+
+            <script src="https://unpkg.com/vue@next"></script>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script>
+
+                const toggle = Vue.createApp({ // el: '#toggle',
+                    data() {
+                        return {show: false}
+                    }
+                }).mount('#message');
+
+
+                const inquiry = Vue.createApp({ // el: '#toggle',
+                    data() {
+                        return {
+                            source: "http://localhost:3000/inquiries",
+                            inquiries: [],
+                            names: '',
+                            charge: '',
+                            phone: '',
+                            email: '',
+                            businessName: '',
+                            needType: '',
+                            message: '',
+                        }
+                    },
+                    methods: {
+                        getInquiries() {
+                            console.log("this is from function getInquiries")
+                            axios.get(this.source)
+                                .then(response => {
+                                    // var api_data = response.data; 
+                                    api_data = response.data;
+                                    for (var key in api_data) {
+                                        if (api_data[key]['status'] == "Atendido") {
+                                            api_data[key]['wasAttended'] = true;
+                                            api_data[key]['isPending'] = false;
+                                        }else {
+                                            api_data[key]['isPending'] = true;
+                                            api_data[key]['wasAttended'] = false;
+                                        }
+                                        //  new_key = key.replace(base + '_', '')
+                                        //  this.ticker[new_key] = Object.assign({}, this.ticker[new_key], api_data[key])
+                                    }
+                                    // this.addUSDT();
+                                    // this.countdown = 10;
+                                    // this.countSeconds();
+                                    this.inquiries = api_data
+                                    console.log(response.data);
+                                }).catch( error => { console.log(error); });
+                        },
+                        viewInquiry(inquiryId) {
+                            console.log(inquiryId);
+                            axios.get(this.source+'/'+inquiryId)
+                                .then(response => {
+                                    // var api_data = response.data; 
+                                    api_data = response.data;
+                                    // for (var key in api_data) {
+                                    //     if (api_data[key]['status'] == "Atendido") {
+                                    //         api_data[key]['wasAttended'] = true;
+                                    //         api_data[key]['isPending'] = false;
+                                    //     }else {
+                                    //         api_data[key]['isPending'] = true;
+                                    //         api_data[key]['wasAttended'] = false;
+                                    //     }
+                                    // }
+                                    this.names = api_data.completeName;
+                                    this.charge = api_data.charge;
+                                    this.phone = api_data.contact.phone;
+                                    this.email = api_data.contact.email;
+                                    this.businessName = api_data.businessName;
+                                    this.needType = api_data.need.needType;
+                                    this.message = api_data.message;
+
+                                    console.log(response.data);
+                                }).catch( error => { console.log(error); });
+                        }
+                    },
+
+                    created() {
+                        console.log("before compile");
+                        this.getInquiries();
+
+                    }
+
+                }).mount('#inquiry');
+            </script>
+        </body>
+    </body>
+</html>
