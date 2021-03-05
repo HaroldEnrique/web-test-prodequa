@@ -17,6 +17,6 @@ Run server
 - http://127.0.0.1:8080
 - http://127.0.0.1:8080/solicitudes.html
 
-### Imágemes
+### Web images
 
-![Primera imagen](https://drive.google.com/file/d/1X89gp3t6P8DuEsAPxdaDzL5Raafe4Jud/view?usp=sharing "a title")
+![Primera imagen]( "a title")
